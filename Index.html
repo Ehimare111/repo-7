@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1219665729906232');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1219665729906232&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confusion to Consistency — How I Made $5,000 Trading Crypto Futures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0B0E0C;
+    --black-soft:#111512;
+    --panel:#161B17;
+    --line: rgba(255,255,255,0.08);
+    --line-bright: rgba(255,255,255,0.14);
+    --text:#EDEFEC;
+    --text-dim:#9AA39C;
+    --text-dimmer:#6B736C;
+    --red:#E5564B;
+    --green:#3DDC84;
+    --green-dim:#2A9D5F;
+    --gold:#E8B339;
+    --gold-bright:#F6CC5C;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    background:var(--black);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{ background:var(--gold); color:var(--black); }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:1.08;
+  }
+
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 28px;
+    backdrop-filter: blur(10px);
+    background:linear-gradient(to bottom, rgba(11,14,12,0.85), rgba(11,14,12,0));
+  }
+  .nav-mark{
+    font-family:'Fraunces', serif;
+    font-size:1.1rem;
+    font-weight:600;
+    color:var(--text);
+  }
+  .nav-mark span{ color:var(--gold); }
+  .nav-cta{
+    font-family:'Inter', sans-serif;
+    font-size:0.82rem;
+    font-weight:600;
+    padding:9px 18px;
+    border:1px solid var(--line-bright);
+    border-radius:100px;
+    color:var(--text);
+    text-decoration:none;
+    transition:border-color .2s, background .2s;
+  }
+  .nav-cta:hover{ border-color:var(--gold); background:rgba(232,179,57,0.08); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    padding-top:110px;
+    padding-bottom:60px;
+  }
+
+  .hero-grain{
+    position:absolute; inset:0;
+    background-image: radial-gradient(circle at 50% 0%, rgba(232,179,57,0.07), transparent 60%);
+    pointer-events:none;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--text-dimmer);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .eyebrow .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 0 3px rgba(229,86,75,0.18);
+  }
+
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    color:var(--text);
+    max-width:880px;
+  }
+  .hero h1 .red{ color:var(--red); }
+  .hero h1 .gold{ color:var(--gold-bright); }
+  .hero h1 .green{ color:var(--green); }
+
+  .hero-sub{
+    margin-top:26px;
+    max-width:560px;
+    font-size:1.08rem;
+    color:var(--text-dim);
+    font-weight:400;
+  }
+
+  .hero-actions{
+    margin-top:42px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  .btn{
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:0.98rem;
+    padding:16px 30px;
+    border-radius:8px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    cursor:pointer;
+    border:none;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:#1A1304;
+    box-shadow:0 0 0 0 rgba(232,179,57,0.5);
+  }
+  .btn-primary:hover{
+    background:var(--gold-bright);
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px rgba(232,179,57,0.28);
+  }
+  .btn-ghost{
+    background:transparent;
+    border:1px solid var(--line-bright);
+    color:var(--text-dim);
+  }
+  .btn-ghost:hover{
+    border-color:var(--green-dim);
+    color:var(--green);
+  }
+
+  .hero-meta{
+    margin-top:18px;
+    font-size:0.82rem;
+    color:var(--text-dimmer);
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  /* ---------- EQUITY CURVE (signature element) ---------- */
+  .curve-section{
+    position:relative;
+    padding:40px 0 10px;
+  }
+  .curve-wrap{
+    position:relative;
+    width:100%;
+    height:340px;
+  }
+  .curve-wrap svg{ width:100%; height:100%; display:block; }
+  .curve-label{
+    position:absolute;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  .curve-label.left{
+    top:14px; left:0;
+    color:var(--red);
+  }
+  .curve-label.right{
+    top:14px; right:0;
+    color:var(--green);
+    text-align:right;
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{
+    position:relative;
+    padding:100px 0;
+    border-top:1px solid var(--line);
+  }
+  .section-tight{ padding:70px 0; }
+
+  .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.76rem;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--text-dimmer);
+    margin-bottom:18px;
+  }
+
+  h2{
+    font-size:clamp(1.8rem, 3.4vw, 2.6rem);
+    color:var(--text);
+    max-width:760px;
+  }
+
+  .lead{
+    margin-top:20px;
+    font-size:1.08rem;
+    color:var(--text-dim);
+    max-width:640px;
+  }
+
+  /* ---------- STORY / PAIN SECTION ---------- */
+  .pain-grid{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .pain-card{
+    background:var(--black);
+    padding:32px 30px;
+  }
+  .pain-card .mark{
+    color:var(--red);
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.85rem;
+    margin-bottom:14px;
+    display:block;
+  }
+  .pain-card p{
+    font-size:1.02rem;
+    color:var(--text);
+    font-weight:500;
+  }
+  .pain-card .sub{
+    margin-top:8px;
+    font-size:0.92rem;
+    color:var(--text-dimmer);
+    font-weight:400;
+  }
+
+  /* ---------- STORY NARRATIVE ---------- */
+  .story{
+    max-width:680px;
+  }
+  .story p{
+    font-size:1.08rem;
+    color:var(--text-dim);
+    margin-bottom:22px;
+  }
+  .story p strong{
+    color:var(--text);
+    font-weight:600;
+  }
+  .story .turn{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.4rem;
+    color:var(--green);
+    line-height:1.4;
+    margin:38px 0;
+    padding-left:24px;
+    border-left:2px solid var(--green-dim);
+  }
+
+  /* ---------- METHOD / WHAT YOU GET ---------- */
+  .method-list{
+    margin-top:50px;
+    display:flex;
+    flex-direction:column;
+  }
+  .method-item{
+    display:grid;
+    grid-template-columns:90px 1fr;
+    gap:28px;
+    padding:30px 0;
+    border-top:1px solid var(--line);
+  }
+  .method-item:first-child{ border-top:none; }
+  .method-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--gold);
+    font-size:0.95rem;
+    padding-top:4px;
+  }
+  .method-item h3{
+    font-size:1.25rem;
+    color:var(--text);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .method-item p{
+    color:var(--text-dim);
+    font-size:1rem;
+    max-width:540px;
+  }
+
+  /* ---------- PROOF / RESULT STRIP ---------- */
+  .proof-strip{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .proof-cell{
+    background:var(--black-soft);
+    padding:34px 26px;
+    text-align:left;
+  }
+  .proof-num{
+    font-family:'Fraunces', serif;
+    font-size:2.2rem;
+    color:var(--green);
+    font-weight:600;
+  }
+  .proof-cap{
+    margin-top:6px;
+    font-size:0.85rem;
+    color:var(--text-dimmer);
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  /* ---------- OFFER / PRICE ---------- */
+  .offer{
+    background:var(--panel);
+    border:1px solid var(--line-bright);
+    border-radius:18px;
+    padding:54px 48px;
+    position:relative;
+    overflow:hidden;
+  }
+  .offer::before{
+    content:"";
+    position:absolute;
+    top:-60%; right:-20%;
+    width:60%; height:160%;
+    background:radial-gradient(circle, rgba(61,220,132,0.10), transparent 65%);
+    pointer-events:none;
+  }
+  .offer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .offer h2{ max-width:520px; }
+  .price-tag{
+    text-align:right;
+  }
+  .price-tag .amount{
+    font-family:'Fraunces', serif;
+    font-size:3rem;
+    color:var(--gold-bright);
+    font-weight:700;
+    line-height:1;
+  }
+  .price-tag .note{
+    margin-top:6px;
+    font-size:0.85rem;
+    color:var(--text-dimmer);
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  .offer-includes{
+    margin-top:42px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px 30px;
+  }
+  .offer-includes li{
+    list-style:none;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    font-size:0.98rem;
+    color:var(--text);
+  }
+  .offer-includes li::before{
+    content:"";
+    width:8px; height:8px;
+    margin-top:7px;
+    flex-shrink:0;
+    background:var(--green);
+    border-radius:2px;
+  }
+
+  .offer-cta{
+    margin-top:44px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+
+  .btn-big{
+    font-size:1.08rem;
+    padding:19px 38px;
+  }
+
+  .guarantee{
+    font-size:0.88rem;
+    color:var(--text-dimmer);
+    max-width:280px;
+  }
+
+  /* ---------- VOICE / AUTHORITY QUOTE ---------- */
+  .quote{
+    max-width:760px;
+  }
+  .quote p{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:clamp(1.4rem, 2.6vw, 1.9rem);
+    color:var(--text);
+    line-height:1.45;
+  }
+  .quote .attrib{
+    margin-top:24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.82rem;
+    color:var(--green);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{
+    border-top:1px solid var(--line);
+    padding:26px 0;
+  }
+  .faq-item:first-child{ border-top:none; }
+  .faq-q{
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--text);
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    list-style:none;
+  }
+  .faq-q::-webkit-details-marker{ display:none; }
+  .faq-q .plus{
+    color:var(--gold);
+    font-family:'JetBrains Mono', monospace;
+    font-size:1.2rem;
+    transition:transform .2s;
+  }
+  details[open] .plus{ transform:rotate(45deg); }
+  .faq-a{
+    margin-top:14px;
+    color:var(--text-dim);
+    font-size:0.98rem;
+    max-width:620px;
+  }
+
+  /* ---------- FINAL CTA ---------- */
+  .final{
+    text-align:center;
+    padding:120px 0 100px;
+  }
+  .final h2{
+    margin:0 auto;
+    font-size:clamp(2rem, 4.4vw, 3.2rem);
+    max-width:680px;
+  }
+  .final .lead{ margin:22px auto 0; text-align:center; }
+  .final .hero-actions{ justify-content:center; margin-top:40px; }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:36px 0 60px;
+    text-align:center;
+    color:var(--text-dimmer);
+    font-size:0.82rem;
+  }
+
+  /* ---------- STICKY MOBILE BAR ---------- */
+  .sticky-bar{
+    position:fixed;
+    bottom:0; left:0; right:0;
+    z-index:90;
+    background:rgba(11,14,12,0.95);
+    backdrop-filter:blur(10px);
+    border-top:1px solid var(--line-bright);
+    padding:14px 20px;
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .sticky-bar .price{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.85rem;
+    color:var(--text-dim);
+  }
+  .sticky-bar .price strong{ color:var(--gold-bright); font-size:1rem; }
+  .sticky-bar .btn{ padding:12px 22px; font-size:0.9rem; }
+
+  @media (max-width: 720px){
+    .pain-grid{ grid-template-columns:1fr; }
+    .proof-strip{ grid-template-columns:1fr; }
+    .offer{ padding:38px 26px; }
+    .offer-includes{ grid-template-columns:1fr; }
+    .offer-top{ flex-direction:column; }
+    .price-tag{ text-align:left; }
+    .method-item{ grid-template-columns:50px 1fr; }
+    .sticky-bar{ display:flex; }
+    .hero{ padding-bottom:100px; }
+    section{ padding:70px 0; }
+  }
+
+  /* fade-in on scroll */
+  .fade-up{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .fade-up.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-mark">consistency<span>.</span>desk</div>
+    <a href="#offer" class="nav-cta">Get the strategy</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-grain"></div>
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span> from blown accounts to a documented $5,000</div>
+      <h1>I was exactly where you are. <span class="red">Then I stopped guessing</span> — and turned one repeatable setup into <span class="gold">$5,000</span>, calmly, in two months.</h1>
+      <p class="hero-sub">No indicators stacked ten deep. No Telegram signals you pray are real. Just the same setup, traded the same way, every single time — until the chaos in my charts turned into a quiet, green, predictable line.</p>
+
+      <div class="hero-actions">
+        <a href="#offer" class="btn btn-primary">Show me the strategy — ₦5,000 →</a>
+        <a href="#story" class="btn btn-ghost">Read what actually happened</a>
+      </div>
+      <div class="hero-meta">2 months · 1 setup · works on crypto futures &amp; forex</div>
+    </div>
+
+    <!-- SIGNATURE EQUITY CURVE -->
+    <div class="curve-section">
+      <div class="wrap">
+        <div class="curve-wrap">
+          <span class="curve-label left mono">where most traders live</span>
+          <span class="curve-label right mono">where this strategy takes you</span>
+          <svg viewBox="0 0 1000 340" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#E5564B"/>
+                <stop offset="45%" stop-color="#E5564B"/>
+                <stop offset="58%" stop-color="#E8B339"/>
+                <stop offset="100%" stop-color="#3DDC84"/>
+              </linearGradient>
+              <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3DDC84" stop-opacity="0.16"/>
+                <stop offset="100%" stop-color="#3DDC84" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="170" x2="1000" y2="170" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <path id="curveFill" d="" fill="url(#fillGrad)" />
+            <path id="curveLine" d="M0,200 C40,260 60,120 100,210 C140,300 160,150 200,230 C230,290 250,180 280,220 C310,260 330,190 360,205 C390,150 410,235 440,200 C470,170 490,205 520,190 C545,178 565,200 585,182 C610,160 630,176 655,150 C685,118 710,140 740,108 C770,80 800,98 830,68 C860,42 885,56 915,30 C940,12 965,20 1000,4"
+              fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAIN / RECOGNITION -->
+  <section id="story">
+    <div class="wrap">
+      <div class="kicker">if this is you, keep reading</div>
+      <h2>You don't have a discipline problem. You have a <em style="font-style:italic;color:var(--green);">strategy</em> problem.</h2>
+      <p class="lead">Most people trading crypto futures right now aren't lazy or reckless. They're working hard, watching charts for hours, and still losing — because nobody ever gave them one clear, complete system. Just pieces. Just noise.</p>
+
+      <div class="pain-grid">
+        <div class="pain-card fade-up">
+          <span class="mark mono">[01]</span>
+          <p>You've blown at least one account.</p>
+          <p class="sub">Maybe more than one. And each time, it didn't feel like bad luck — it felt like proof that you're just not built for this.</p>
+        </div>
+        <div class="pain-card fade-up">
+          <span class="mark mono">[02]</span>
+          <p>Your stop loss feels like a trap, not protection.</p>
+          <p class="sub">You set it carefully. The market hits it. Then reverses exactly where you predicted, without you in the trade.</p>
+        </div>
+        <div class="pain-card fade-up">
+          <span class="mark mono">[03]</span>
+          <p>You're trading on emotion, even when you "have a plan."</p>
+          <p class="sub">Fear closes your winners early. Hope holds your losers too long. You know this. Knowing hasn't fixed it.</p>
+        </div>
+        <div class="pain-card fade-up">
+          <span class="mark mono">[04]</span>
+          <p>The motivation is draining, fast.</p>
+          <p class="sub">Not because you're weak. Because confusion is exhausting, and you've been confused for months.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY NARRATIVE -->
+  <section>
+    <div class="wrap">
+      <div class="kicker">how this actually started</div>
+      <h2>I didn't find this strategy in a course. I found it in the wreckage of my own account.</h2>
+
+      <div class="story" style="margin-top:40px;">
+        <p>I'm not going to pretend the early days were strategic. They weren't. I jumped into crypto futures the way most people do — over-leveraged, under-informed, chasing green candles that had already moved without me. <strong>I blew through capital fast enough that it stopped feeling like money and started feeling like a personal verdict on whether I was cut out for this at all.</strong></p>
+
+        <p>I tried everything next. Indicator stacks that contradicted each other. Paid signal groups that vanished the moment a trade went wrong. Strategies copied from YouTube that worked perfectly in the video and fell apart the second real money was on the line. Every loss added a new layer of noise to my head, until I couldn't tell the difference between a real setup and my own anxiety dressed up as one.</p>
+
+        <p class="turn">The shift didn't happen when I found a better indicator. It happened when I stopped looking for one — and started building a single, repeatable rule for when I was allowed to enter a trade, and when I wasn't.</p>
+
+        <p>That's the whole secret, and I say that knowing how unsatisfying it sounds. <strong>One setup. Traded the same way, every time, with the emotion engineered out of the decision before I ever opened the chart.</strong> No more "does this feel right." No more revenge trades after a stop loss. Just a structure clear enough that a tired, frustrated version of me could still follow it correctly.</p>
+
+        <p>Two months later, I'd turned that structure into $5,000 — not from one lucky trade, but from the same small, boring edge repeated until it compounded. The strategy didn't get exciting. I got consistent. Those turned out to be the same thing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF STRIP -->
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="kicker">what changed, specifically</div>
+      <h2>This isn't a motivational story. It's a mechanical one.</h2>
+      <div class="proof-strip">
+        <div class="proof-cell fade-up">
+          <div class="proof-num">$5,000</div>
+          <div class="proof-cap">EARNED IN 2 MONTHS, ONE STRATEGY</div>
+        </div>
+        <div class="proof-cell fade-up">
+          <div class="proof-num">1</div>
+          <div class="proof-cap">SETUP — NO INDICATOR STACKING</div>
+        </div>
+        <div class="proof-cell fade-up">
+          <div class="proof-num">2</div>
+          <div class="proof-cap">MARKETS IT TRANSFERS TO: CRYPTO FUTURES &amp; FOREX</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section>
+    <div class="wrap">
+      <div class="kicker">what you're actually learning</div>
+      <h2>The system, broken into exactly four moving parts.</h2>
+      <p class="lead">No fluff modules. No 40-hour course you'll abandon by lesson three. Just the structure, taught the way I wish someone had taught it to me before I paid for it in blown accounts.</p>
+
+      <div class="method-list">
+        <div class="method-item fade-up">
+          <div class="method-num mono">01</div>
+          <div>
+            <h3>The one setup that replaces forty indicators</h3>
+            <p>The exact entry condition I trade — and just as importantly, the conditions under which I refuse to enter, no matter how tempting the chart looks.</p>
+          </div>
+        </div>
+        <div class="method-item fade-up">
+          <div class="method-num mono">02</div>
+          <div>
+            <h3>Stop losses that protect you instead of feeding the market</h3>
+            <p>Where to actually place a stop so it reflects where you're wrong — not where it's statistically convenient for liquidity to take you out first.</p>
+          </div>
+        </div>
+        <div class="method-item fade-up">
+          <div class="method-num mono">03</div>
+          <div>
+            <h3>The emotional system behind the technical one</h3>
+            <p>How to engineer your decisions before the trade, so fear and hope have nothing left to influence in the moment. This is the part most courses skip entirely.</p>
+          </div>
+        </div>
+        <div class="method-item fade-up">
+          <div class="method-num mono">04</div>
+          <div>
+            <h3>How this same edge carries into forex</h3>
+            <p>The underlying structure isn't crypto-specific. Once you see it clearly, you'll recognize it on any chart with price, volume, and liquidity — forex included.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHORITY QUOTE -->
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="quote">
+        <p>"I'm not here to motivate you. Motivation didn't fix my trading — structure did. I'm giving you the exact structure, because I'd rather you skip the two years I spent confused than admire how far I came from it."</p>
+        <div class="attrib">— the trader behind this strategy</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section id="offer">
+    <div class="wrap">
+      <div class="offer">
+        <div class="offer-top">
+          <div>
+            <div class="kicker" style="margin-bottom:14px;">the offer</div>
+            <h2>Everything that took me two months of losses to figure out — in one sitting.</h2>
+          </div>
+          <div class="price-tag">
+            <div class="amount">₦5,000</div>
+            <div class="note">one-time · instant access</div>
+          </div>
+        </div>
+
+        <ul class="offer-includes">
+          <li>The complete entry setup, explained with real chart examples from my own trades</li>
+          <li>My exact stop-loss placement rules for crypto futures</li>
+          <li>The emotional framework that ended my revenge-trading cycle</li>
+          <li>How to adapt the same edge to forex pairs</li>
+          <li>A clear "do not enter" checklist — what kept me out of bad trades</li>
+          <li>Built for traders rebuilding after a blown account, not beginners starting from zero</li>
+        </ul>
+
+        <div class="offer-cta">
+          <a href="https://selar.com/qm160c7376" target="_blank" rel="noopener" class="btn btn-primary btn-big">Get instant access — ₦5,000 →</a>
+          <p class="guarantee">This is a small price next to what one more blown account costs you. Most people spend more than this on a single bad trade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="kicker">before you go</div>
+      <h2 style="margin-bottom:30px;">Questions you're probably already asking</h2>
+
+      <details class="faq-item">
+        <summary class="faq-q">Will this work if I've already blown more than one account?<span class="plus">+</span></summary>
+        <p class="faq-a">Yes — this is built specifically for traders rebuilding, not for someone opening their first chart. If anything, having felt the cost of a strategy-less approach will make this click faster.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Do I need a large account to start?<span class="plus">+</span></summary>
+        <p class="faq-a">No. The setup is about precision and rules, not position size. You apply the same structure whether you're trading with $50 or $5,000.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Is this signals, or do I learn to trade myself?<span class="plus">+</span></summary>
+        <p class="faq-a">You learn the system itself. No signal group, because signal groups disappear the moment you need them most. This is yours to keep and use independently.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Does it really transfer to forex?<span class="plus">+</span></summary>
+        <p class="faq-a">The setup is built on price structure, volume, and liquidity behavior — none of that is unique to crypto. The course shows you exactly how to carry it across.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>Confusion has a cost. Consistency has a price. <span style="color:var(--gold-bright);">This is the smaller number.</span></h2>
+      <p class="lead">You can keep refreshing charts hoping the next signal group is the real one. Or you can take the same structure that turned my account around, for less than the cost of a meal.</p>
+      <div class="hero-actions">
+        <a href="https://selar.com/qm160c7376" target="_blank" rel="noopener" class="btn btn-primary btn-big">Get the strategy — ₦5,000 →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      Trading carries risk. This material teaches a personal strategy and methodology — it is educational content, not financial advice, and past results don't guarantee future outcomes.
+    </div>
+  </footer>
+
+  <div class="sticky-bar">
+    <div class="price">Full strategy <strong>₦5,000</strong></div>
+    <a href="https://selar.com/qm160c7376" target="_blank" rel="noopener" class="btn btn-primary">Get access →</a>
+  </div>
+
+  <script>
+    // Animate equity curve fill path to match line path on load
+    const line = document.getElementById('curveLine');
+    const fill = document.getElementById('curveFill');
+    if(line && fill){
+      const d = line.getAttribute('d');
+      fill.setAttribute('d', d + ' L1000,340 L0,340 Z');
+    }
+
+    // Scroll fade-ins
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15 });
+    document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+    // Sticky bar hide near offer/final section to avoid double CTA crowding
+    const offerSection = document.getElementById('offer');
+    const stickyBar = document.querySelector('.sticky-bar');
+    if(offerSection && stickyBar){
+      const sBarObserver = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          stickyBar.style.transform = entry.isIntersecting ? 'translateY(100%)' : 'translateY(0)';
+          stickyBar.style.transition = 'transform .3s ease';
+        });
+      }, { threshold:0.3 });
+      sBarObserver.observe(offerSection);
+    }
+  </script>
+
+</body>
+</html>
